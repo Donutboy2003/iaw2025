@@ -1,19 +1,28 @@
 'use client';
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { useState, useEffect } from 'react'
-import EventCard from './components/EventCard'
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import EventCard from './components/EventCard';
+
+// Define the type for an event
+type Event = {
+  id: number;
+  name: string;
+  date: string;
+  time: string;
+  location: string;
+  rsvpLink: string;
+};
 
 // Mock data for events
-const events = [
+const events: Event[] = [
   {
     id: 1,
     name: "Tech Talk on AI",
     date: "2024-12-31",
     time: "18:00",
     location: "Room 101, Engineering Building",
-    rsvpLink: "https://forms.gle/exampleRSVP1"
+    rsvpLink: "https://forms.gle/exampleRSVP1",
   },
   {
     id: 2,
@@ -21,7 +30,7 @@ const events = [
     date: "2024-01-15",
     time: "14:00",
     location: "Community Hall",
-    rsvpLink: "https://forms.gle/exampleRSVP2"
+    rsvpLink: "https://forms.gle/exampleRSVP2",
   },
   {
     id: 3,
@@ -29,18 +38,19 @@ const events = [
     date: "2024-02-05",
     time: "10:00",
     location: "Online (Zoom)",
-    rsvpLink: "https://forms.gle/exampleRSVP3"
+    rsvpLink: "https://forms.gle/exampleRSVP3",
   },
 ];
 
-function getNextEvent(events) {
+// Define the type of the function parameter
+function getNextEvent(events: Event[]): Event | null {
   const now = new Date();
-  return events.find(event => new Date(`${event.date}T${event.time}`) > now);
+  return events.find(event => new Date(`${event.date}T${event.time}`) > now) || null;
 }
 
 export default function Home() {
-  const [nextEvent, setNextEvent] = useState(null);
-  const [timeRemaining, setTimeRemaining] = useState("");
+  const [nextEvent, setNextEvent] = useState<Event | null>(null);
+  const [timeRemaining, setTimeRemaining] = useState<string>("");
 
   useEffect(() => {
     const next = getNextEvent(events);
@@ -50,7 +60,7 @@ export default function Home() {
       if (next) {
         const eventTime = new Date(`${next.date}T${next.time}`);
         const now = new Date();
-        const diff = eventTime - now;
+        const diff = eventTime.getTime() - now.getTime();
 
         if (diff > 0) {
           const hours = Math.floor(diff / (1000 * 60 * 60));
