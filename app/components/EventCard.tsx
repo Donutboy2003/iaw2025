@@ -21,7 +21,7 @@ export default function EventCard({
       <p>Location: {location}</p>
       <Link href={rsvpLink}>
         <button className="mt-3 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
-          RSVP
+          RSVP Now {/* Added 'Now' */}
         </button>
       </Link>
     </div>
