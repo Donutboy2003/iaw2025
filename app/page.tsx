@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import Particles from './components/ui/Particles'; // Adjust the path to your Particles component
-import EventCard from './components/EventCard';
+import Particles from './components/ui/Particles';
+import TabCard from './components/TabCard';
 
 // Define the type for an event
 type Event = {
@@ -109,25 +109,7 @@ export default function Home() {
         )}
 
         <div>
-          <h2 className="text-xl font-bold mb-4">All Events</h2>
-          <div className="grid grid-cols-1 gap-4">
-            {events.map(event => (
-              <div
-                key={event.id}
-                className="p-4 border rounded shadow-md hover:shadow-lg transition"
-              >
-                <h3 className="text-lg font-semibold">{event.name}</h3>
-                <p>Date: {event.date}</p>
-                <p>Time: {event.time}</p>
-                <p>Location: {event.location}</p>
-                <Link href={event.rsvpLink}>
-                  <button className="mt-3 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
-                    RSVP
-                  </button>
-                </Link>
-              </div>
-            ))}
-          </div>
+          <TabCard/>
         </div>
       </div>
     </main>
