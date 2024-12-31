@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import EventCard from './components/EventCard';
-
+import TabCard from './components/TabCard';
+import Particles from '@/app/components/Particles'
 // Define the type for an event
 type Event = {
   id: number;
@@ -77,6 +78,7 @@ export default function Home() {
   }, []);
 
   return (
+    
     <main className="p-4">
       <h1 className="text-2xl font-bold mb-4">Upcoming Events</h1>
 
@@ -118,6 +120,7 @@ export default function Home() {
           ))}
         </div>
       </div>
+      <TabCard/>
     </main>
   );
 }
