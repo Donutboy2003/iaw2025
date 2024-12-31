@@ -216,16 +216,16 @@ const TabCard: React.FC<TabCardProps> = ({ events }) => {
             What is IAW?
           </h2>
           <p className="font-poppins text-sm sm:text-base text-gray-300">
-            Islam Awareness Week (IAW) is one of the MSA's largest and most impactful initiatives. IAW is a week-long event dedicated to conveying the true message of Islam and its relevance to humanity in today's contemporary context, engaging both non-Muslims and Muslims alike.
+            Islam Awareness Week (IAW) is one of the MSA&apos;s largest and most impactful initiatives. IAW is a week-long event dedicated to conveying the true message of Islam and its relevance to humanity in today&apos;s contemporary context, engaging both non-Muslims and Muslims alike.
           </p>
           <p className="font-poppins text-sm sm:text-base text-gray-300">
-            In 2024, by the grace of Allah SWT, we organized the biggest Islam Awareness Week in recent years! The event featured influential and engaging speakers from around the world, including The Sunnah Guy, Khaled Beydoun, Shaun King, and Shaykh Navaid Aziz. Activities included da'wah booths, try-on hijab booths, public Quran recitations, lectures, speaker panels, a dinner, and more.
+            In 2024, by the grace of Allah SWT, we organized the biggest Islam Awareness Week in recent years! The event featured influential and engaging speakers from around the world, including The Sunnah Guy, Khaled Beydoun, Shaun King, and Shaykh Navaid Aziz. Activities included da&apos;wah booths, try-on hijab booths, public Quran recitations, lectures, speaker panels, a dinner, and more.
           </p>
           <p className="font-poppins text-sm sm:text-base text-gray-300">
-            For 2025, we aim to build on this momentum and once again invite hundreds of students, faculty, staff, and people from all walks of life to learn about Islam's universal and timeless message. With exciting speakers and events in the works, IAW promises to be an unforgettable experience for everyone involved.
+            For 2025, we aim to build on this momentum and once again invite hundreds of students, faculty, staff, and people from all walks of life to learn about Islam&apos;s universal and timeless message. With exciting speakers and events in the works, IAW promises to be an unforgettable experience for everyone involved.
           </p>
           <p className="font-poppins text-sm sm:text-base text-gray-300">
-            This week-long event not only provides a platform for education and dialogue but also fosters a deeper understanding of Islam's relevance in today's world. Stay tuned for more details on the upcoming IAW!
+            This week-long event not only provides a platform for education and dialogue but also fosters a deeper understanding of Islam&apos;s relevance in today&apos;s world. Stay tuned for more details on the upcoming IAW!
           </p>
         </div>
       ),
@@ -275,7 +275,7 @@ const TabCard: React.FC<TabCardProps> = ({ events }) => {
             Coming soon...
           </p>
           <p className="font-poppins text-sm sm:text-base text-gray-300">
-            Please email us at msa@ualberta.ca if you'd like to sponsor IAW 2025
+            Please email us at msa@ualberta.ca if you&apos;d like to sponsor IAW 2025
           </p>
         </div>
       ),
