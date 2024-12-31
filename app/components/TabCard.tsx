@@ -26,7 +26,6 @@ function groupEventsByDate(events: Event[]): Record<string, Event[]> {
 
 // A separate component for the flippable event card
 const EventFlipCard: React.FC<{ event: Event }> = ({ event }) => {
-  // Local state for flipping each event individually
   const [isFlipped, setIsFlipped] = useState(false);
 
   return (
@@ -41,35 +40,19 @@ const EventFlipCard: React.FC<{ event: Event }> = ({ event }) => {
         mb-4
       "
     >
-      {/* Container that flips front/back */}
       <div
-        className={`
-          preserve-3d
-          absolute inset-0
-          transition-transform duration-500
-          ${isFlipped ? "rotate-y-180" : ""}
-        `}
+        className={`preserve-3d absolute inset-0 transition-transform duration-500 ${
+          isFlipped ? "rotate-y-180" : ""
+        }`}
       >
         {/* Front Side */}
-        <div
-          className="
-            absolute inset-0 
-            backface-hidden
-            bg-gray-900 bg-opacity-80
-            rounded-md p-4
-            flex flex-col justify-between
-          "
-        >
+        <div className="absolute inset-0 backface-hidden bg-gray-900 bg-opacity-80 rounded-md p-4 flex flex-col justify-between">
           <div>
             <h4 className="text-lg font-semibold text-gold mb-1">
               {event.name}
             </h4>
             <p className="text-sm text-gray-300 mb-2">
               {event.startTime} - {event.endTime} | {event.location}
-            </p>
-            <p className="text-xs sm:text-sm text-gray-400">
-              {/* Short snippet so it doesn't look empty */}
-              Quick highlight or snippet about this event...
             </p>
           </div>
           <div className="mt-2 flex justify-between items-center">
@@ -85,34 +68,40 @@ const EventFlipCard: React.FC<{ event: Event }> = ({ event }) => {
             >
               Learn More
             </button>
-            <a
-              href={event.rsvpLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="
-                px-3 py-1 text-xs sm:text-sm
-                bg-gold text-black 
-                rounded
-                hover:bg-yellow-500
-                focus:outline-none focus:ring-1 focus:ring-gold
-              "
-            >
-              RSVP
-            </a>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].includes(event.id) ? (
+              <button
+                className="
+                  px-3 py-1 text-xs sm:text-sm
+                  bg-gray-500 text-gray-300 
+                  rounded
+                  cursor-not-allowed
+                  focus:outline-none
+                "
+                disabled
+              >
+                RSVP Disabled
+              </button>
+            ) : (
+              <a
+                href={event.rsvpLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  px-3 py-1 text-xs sm:text-sm
+                  bg-gold text-black 
+                  rounded
+                  hover:bg-yellow-500
+                  focus:outline-none focus:ring-1 focus:ring-gold
+                "
+              >
+                RSVP
+              </a>
+            )}
           </div>
         </div>
 
         {/* Back Side */}
-        <div
-          className="
-            absolute inset-0
-            backface-hidden
-            bg-gray-900 bg-opacity-90
-            rounded-md p-4
-            rotate-y-180
-            flex flex-col justify-between
-          "
-        >
+        <div className="absolute inset-0 backface-hidden bg-gray-900 bg-opacity-90 rounded-md p-4 rotate-y-180 flex flex-col justify-between">
           <div>
             <h4 className="text-lg font-semibold text-gold mb-2">
               About this event
@@ -140,6 +129,7 @@ const EventFlipCard: React.FC<{ event: Event }> = ({ event }) => {
     </div>
   );
 };
+
 
 const TabCard: React.FC<TabCardProps> = ({ events }) => {
   const groupedEvents = groupEventsByDate(events);
@@ -226,7 +216,7 @@ const TabCard: React.FC<TabCardProps> = ({ events }) => {
             What is IAW?
           </h2>
           <p className="font-poppins text-sm sm:text-base text-gray-300">
-            Islam Awareness Week (IAW) fosters community understanding...
+            Coming soon...
           </p>
         </div>
       ),
@@ -245,7 +235,7 @@ const TabCard: React.FC<TabCardProps> = ({ events }) => {
             Learn About Islam
           </h2>
           <p className="font-poppins text-sm sm:text-base text-gray-300">
-            Islam is ...
+            Coming soon...
           </p>
         </div>
       ),
@@ -259,7 +249,7 @@ const TabCard: React.FC<TabCardProps> = ({ events }) => {
             About Speakers
           </h2>
           <p className="font-poppins text-sm sm:text-base text-gray-300">
-            Our guest speakers bring valuable insights...
+            Coming soon
           </p>
         </div>
       ),
@@ -273,7 +263,7 @@ const TabCard: React.FC<TabCardProps> = ({ events }) => {
             Sponsors
           </h2>
           <p className="font-poppins text-sm sm:text-base text-gray-300">
-            We appreciate our sponsors generous support...
+            Coming soon...
           </p>
         </div>
       ),

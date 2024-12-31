@@ -84,7 +84,25 @@ const events: Event[] = [
     name: "IAW Dinner with special guest Way of Life SQ",
     date: "2025-01-16",
     startTime: "17:00",
-    endTime: "19:00",
+    endTime: "20:00",
+    location: "TBA",
+    rsvpLink: "https://forms.gle/exampleRSVP8",
+  },
+  {
+    id: 9,
+    name: "Brothers session with Way of Life SQ",
+    date: "2025-01-17",
+    startTime: "13:00",
+    endTime: "15:00",
+    location: "TBA",
+    rsvpLink: "https://forms.gle/exampleRSVP7",
+  },
+  {
+    id: 10,
+    name: "Sisters' Table of Barakah Halaqa",
+    date: "2025-01-17",
+    startTime: "13:00",
+    endTime: "15:00",
     location: "TBA",
     rsvpLink: "https://forms.gle/exampleRSVP8",
   },
@@ -145,41 +163,51 @@ export default function Home() {
 
       {/* Next Event / Countdown */}
       <section className="relative z-10 flex flex-col items-center text-center px-4 py-8 text-white space-y-4 sm:space-y-6">
-        {nextEvent ? (
-          <div className="w-full max-w-lg bg-black bg-opacity-70 rounded-lg shadow-md p-6 transition">
-            <h3 className="text-xl sm:text-2xl font-baskervville mb-2">
-              Next Event In:{" "}
-              <span className="text-gold">{timeRemaining}</span>
-            </h3>
-            <h2 className="text-lg sm:text-xl font-baskervville mb-3 text-gold">
-              {nextEvent.name}
-            </h2>
-            <div className="space-y-1 mb-4 text-sm sm:text-base text-white">
-              <p>Date: {nextEvent.date}</p>
-              <p>Start Time: {nextEvent.startTime}</p>
-              <p>End Time: {nextEvent.endTime}</p>
-              <p>Location: {nextEvent.location}</p>
-            </div>
-            <a
-              href={nextEvent.rsvpLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-5 py-2 bg-gold text-black rounded-md font-medium hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-            >
-              RSVP Now
-            </a>
-          </div>
-        ) : (
-          <div className="w-full max-w-lg bg-black bg-opacity-70 rounded-lg shadow-md p-6">
-            <h3 className="text-xl sm:text-2xl font-baskervville mb-2">
-              No upcoming events
-            </h3>
-            <p className="text-sm sm:text-base text-gray-300">
-              Stay tuned for updates or check out our full itinerary below!
-            </p>
-          </div>
-        )}
-      </section>
+  {nextEvent ? (
+    <div className="w-full max-w-lg bg-black bg-opacity-70 rounded-lg shadow-md p-6 transition">
+      <h3 className="text-xl sm:text-2xl font-baskervville mb-2">
+        Next Event In:{" "}
+        <span className="text-gold">{timeRemaining}</span>
+      </h3>
+      <h2 className="text-lg sm:text-xl font-baskervville mb-3 text-gold">
+        {nextEvent.name}
+      </h2>
+      <div className="space-y-1 mb-4 text-sm sm:text-base text-white">
+        <p>Date: {nextEvent.date}</p>
+        <p>Start Time: {nextEvent.startTime}</p>
+        <p>End Time: {nextEvent.endTime}</p>
+        <p>Location: {nextEvent.location}</p>
+      </div>
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].includes(nextEvent.id) ? (
+        <button
+          className="inline-block px-5 py-2 bg-gray-500 text-gray-300 rounded-md font-medium cursor-not-allowed focus:outline-none"
+          disabled
+        >
+          RSVP Disabled
+        </button>
+      ) : (
+        <a
+          href={nextEvent.rsvpLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block px-5 py-2 bg-gold text-black rounded-md font-medium hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+        >
+          RSVP
+        </a>
+      )}
+    </div>
+  ) : (
+    <div className="w-full max-w-lg bg-black bg-opacity-70 rounded-lg shadow-md p-6">
+      <h3 className="text-xl sm:text-2xl font-baskervville mb-2">
+        No upcoming events
+      </h3>
+      <p className="text-sm sm:text-base text-gray-300">
+        Stay tuned for updates or check out our full itinerary below!
+      </p>
+    </div>
+  )}
+</section>
+
 
       {/* TabCard / Pill Navigation & Content */}
       <section className="relative z-10 flex flex-col items-center text-center px-4 pb-16 text-white">
