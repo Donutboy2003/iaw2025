@@ -139,8 +139,7 @@ export default function Home() {
           Islam Awareness Week 2025
         </h1>
         <p className="text-lg sm:text-xl md:text-2xl text-gray-300 italic font-poppins max-w-2xl">
-          Reawaken your heart and explore the rich cultural tapestry of Islam 
-          through engaging events, lectures, and interactive experiences.
+          Reawaken your heart.
         </p>
       </section>
 
