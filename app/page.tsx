@@ -82,7 +82,7 @@ const events: Event[] = [
   {
     id: 8,
     name: "IAW Dinner with special guest Way of Life SQ",
-    date: "2025-01-16",
+    date: "2025-01-17",
     startTime: "17:00",
     endTime: "20:00",
     location: "TBA",
@@ -91,7 +91,7 @@ const events: Event[] = [
   {
     id: 9,
     name: "Brothers session with Way of Life SQ",
-    date: "2025-01-17",
+    date: "2025-01-18",
     startTime: "13:00",
     endTime: "15:00",
     location: "TBA",
@@ -100,7 +100,7 @@ const events: Event[] = [
   {
     id: 10,
     name: "Sisters' Table of Barakah Halaqa",
-    date: "2025-01-17",
+    date: "2025-01-18",
     startTime: "13:00",
     endTime: "15:00",
     location: "TBA",
