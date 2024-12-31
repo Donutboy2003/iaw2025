@@ -1,105 +1,115 @@
 import React from "react";
 import Tabs from "@/app/components/ui/tabs";
 
-// Define the Event type
 interface Event {
   id: number;
   name: string;
   date: string;
-  time: string;
+  startTime: string;
+  endTime: string;
   location: string;
   rsvpLink: string;
 }
 
-// Mock data for events
-const events: Event[] = [
-  {
-    id: 1,
-    name: "Tech Talk on AI",
-    date: "2024-12-31",
-    time: "18:00",
-    location: "Room 101, Engineering Building",
-    rsvpLink: "https://forms.gle/exampleRSVP1",
-  },
-  {
-    id: 2,
-    name: "Community Meetup",
-    date: "2024-01-15",
-    time: "14:00",
-    location: "Community Hall",
-    rsvpLink: "https://forms.gle/exampleRSVP2",
-  },
-  {
-    id: 3,
-    name: "Workshop: Web Development Basics",
-    date: "2024-02-05",
-    time: "10:00",
-    location: "Online (Zoom)",
-    rsvpLink: "https://forms.gle/exampleRSVP3",
-  },
-];
+interface TabCardProps {
+  events: Event[];
+}
 
-const TabCard = () => {
+const TabCard: React.FC<TabCardProps> = ({ events }) => {
   const tabs = [
+    {
+      id: "what-is-iaw",
+      label: "What is IAW?",
+      content: (
+        <div className="space-y-4">
+          <h2 className="text-2xl font-baskervville glow-text">What is IAW?</h2>
+          <p className="font-poppins">
+            Islam Awareness Week (IAW) is a week dedicated to ...
+          </p>
+        </div>
+      ),
+    },
     {
       id: "itinerary",
       label: "Itinerary",
       content: (
         <div>
-          <h3 className="text-xl font-semibold mb-4">Upcoming Events</h3>
-          <ul className="space-y-4">
+          <h2 className="text-2xl font-baskervville glow-text mb-4">All Events</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {events.map((event) => (
-              <li
+              <div
                 key={event.id}
-                className="p-4 border border-gray-200 rounded-lg shadow-md bg-white bg-opacity-30"
+                className="relative p-6 rounded-xl transition hover:shadow-xl"
+                style={{
+                  background: "transparent",
+                  boxShadow: "8px 8px 16px #0c0c0c, -8px -8px 16px #282828",
+                }}
               >
-                <h4 className="text-lg font-medium text-gray-800">
+                <h3 className="text-lg font-baskervville text-gold mb-2">
                   {event.name}
-                </h4>
-                <p className="text-gray-600">
-                  <strong>Date:</strong> {event.date}
-                </p>
-                <p className="text-gray-600">
-                  <strong>Time:</strong> {event.time}
-                </p>
-                <p className="text-gray-600">
-                  <strong>Location:</strong> {event.location}
-                </p>
+                </h3>
+                <p className="text-white">Date: {event.date}</p>
+                <p className="text-white">Start Time: {event.startTime}</p>
+                <p className="text-white">End Time: {event.endTime}</p>
+                <p className="text-white">Location: {event.location}</p>
                 <a
                   href={event.rsvpLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-500 hover:underline"
+                  className="mt-3 inline-block px-4 py-2 bg-gold text-black rounded hover:bg-yellow-600 transition font-poppins"
+                  style={{
+                    boxShadow:
+                      "inset 3px 3px 6px rgba(0,0,0,0.4), inset -3px -3px 6px rgba(255,255,255,0.1)",
+                  }}
                 >
-                  RSVP Here
+                  RSVP
                 </a>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       ),
     },
     {
-      id: "about",
-      label: "About IAW",
+      id: "learn-about-islam",
+      label: "Learn About Islam",
       content: (
-        <p>
-          International Awareness Week (IAW) brings communities together through
-          shared learning and cultural experiences.
-        </p>
+        <div className="space-y-4">
+          <h2 className="text-2xl font-baskervville glow-text">Learn About Islam</h2>
+          <p className="font-poppins">
+            Islam is one of the world's major religions ....
+          </p>
+        </div>
+      ),
+    },
+    {
+      id: "about-speakers",
+      label: "About Speakers",
+      content: (
+        <div className="space-y-4">
+          <h2 className="text-2xl font-baskervville glow-text">About Speakers</h2>
+          <p className="font-poppins">
+            Our guest speakers are ....
+          </p>
+        </div>
+      ),
+    },
+    {
+      id: "sponsors",
+      label: "Sponsors",
+      content: (
+        <div className="space-y-4">
+          <h2 className="text-2xl font-baskervville glow-text">Sponsors</h2>
+          <p className="font-poppins">
+            We are grateful to our sponsors for making IAW 2025 possible.
+          </p>
+        </div>
       ),
     },
   ];
 
   return (
-    <div
-      className="
-        w-full max-w-xl mx-auto
-        p-6 rounded-lg shadow-lg
-        bg-white
-        backdrop-filter backdrop-blur-md
-      "
-    >
+    <div className="w-full max-w-4xl p-6 text-left bg-transparent">
       <Tabs tabs={tabs} />
     </div>
   );
