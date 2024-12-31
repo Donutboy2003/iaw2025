@@ -27,6 +27,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  overflow-x: hidden; 
 }
 
 h1, h2, h3, h4, h5, h6, strong {
@@ -41,4 +42,16 @@ h1, h2, h3, h4, h5, h6, strong {
     0 0 10px #bbae72,
     0 0 20px #bbae72,
     0 0 30px #bbae72;
+}
+.perspective-1000 {
+  perspective: 1000px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
 }

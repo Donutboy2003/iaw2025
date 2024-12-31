@@ -14,6 +14,7 @@ type Event = {
   rsvpLink: string;
 };
 
+// Mock data for events
 const events: Event[] = [
   {
     id: 1,
@@ -89,16 +90,18 @@ const events: Event[] = [
   },
 ];
 
+
 export default function Home() {
   const [nextEvent, setNextEvent] = useState<Event | null>(null);
   const [timeRemaining, setTimeRemaining] = useState<string>("");
 
+  // Find the next upcoming event
   useEffect(() => {
     const now = new Date();
     const upcomingEvent = events.find(
       (event) => new Date(`${event.date}T${event.startTime}`) > now
     );
-    setNextEvent(upcomingEvent);
+    setNextEvent(upcomingEvent || null);
 
     if (upcomingEvent) {
       const interval = setInterval(() => {
@@ -120,38 +123,39 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
+    <main className="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden">
+      {/* Particles Background */}
       <Particles
         className="absolute inset-0 z-0"
-        quantity={300}
+        quantity={200}
         color="#FFD700"
-        size={0.5}
+        size={0.4}
         staticity={100}
       />
 
-      <div className="relative z-10 flex flex-col items-center text-center px-4 py-12 text-white">
-        <h1 className="text-6xl font-baskervville mb-4 glow-text tracking-tight">
+      {/* Hero Section */}
+      <section className="relative z-10 flex flex-col items-center text-center px-4 pt-16 pb-10 text-white space-y-6 sm:space-y-8">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-baskervville glow-text tracking-tight">
           Islam Awareness Week 2025
         </h1>
-        <h2 className="text-2xl md:text-3xl text-gray-300 mb-10 italic font-poppins">
-          Reawaken your heart
-        </h2>
+        <p className="text-lg sm:text-xl md:text-2xl text-gray-300 italic font-poppins max-w-2xl">
+          Reawaken your heart and explore the rich cultural tapestry of Islam 
+          through engaging events, lectures, and interactive experiences.
+        </p>
+      </section>
 
-        {nextEvent && (
-          <div
-            className="mb-12 w-full max-w-xl rounded-xl p-6 transition hover:shadow-xl"
-            style={{
-              background: "transparent",
-              boxShadow: "8px 8px 16px #0c0c0c, -8px -8px 16px #282828",
-            }}
-          >
-            <h3 className="text-xl font-baskervville mb-2">
-              Next Event In: <span className="text-gold">{timeRemaining}</span>
+      {/* Next Event / Countdown */}
+      <section className="relative z-10 flex flex-col items-center text-center px-4 py-8 text-white space-y-4 sm:space-y-6">
+        {nextEvent ? (
+          <div className="w-full max-w-lg bg-black bg-opacity-70 rounded-lg shadow-md p-6 transition">
+            <h3 className="text-xl sm:text-2xl font-baskervville mb-2">
+              Next Event In:{" "}
+              <span className="text-gold">{timeRemaining}</span>
             </h3>
-            <h2 className="text-2xl font-baskervville mb-4 text-gold">
+            <h2 className="text-lg sm:text-xl font-baskervville mb-3 text-gold">
               {nextEvent.name}
             </h2>
-            <div className="space-y-1 mb-4 text-white">
+            <div className="space-y-1 mb-4 text-sm sm:text-base text-white">
               <p>Date: {nextEvent.date}</p>
               <p>Start Time: {nextEvent.startTime}</p>
               <p>End Time: {nextEvent.endTime}</p>
@@ -161,19 +165,30 @@ export default function Home() {
               href={nextEvent.rsvpLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mt-4 px-6 py-3 bg-gold text-black font-medium rounded hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              style={{
-                boxShadow:
-                  "inset 3px 3px 6px rgba(0,0,0,0.4), inset -3px -3px 6px rgba(255,255,255,0.1)",
-              }}
+              className="inline-block px-5 py-2 bg-gold text-black rounded-md font-medium hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
             >
               RSVP Now
             </a>
           </div>
+        ) : (
+          <div className="w-full max-w-lg bg-black bg-opacity-70 rounded-lg shadow-md p-6">
+            <h3 className="text-xl sm:text-2xl font-baskervville mb-2">
+              No upcoming events
+            </h3>
+            <p className="text-sm sm:text-base text-gray-300">
+              Stay tuned for updates or check out our full itinerary below!
+            </p>
+          </div>
         )}
+      </section>
 
-        <TabCard events={events} />
-      </div>
+      {/* TabCard / Pill Navigation & Content */}
+      <section className="relative z-10 flex flex-col items-center text-center px-4 pb-16 text-white">
+        <div className="w-full max-w-xl mx-auto">
+          {/* You already have a TabCard that uses pill navigation inside */}
+          <TabCard events={events} />
+        </div>
+      </section>
     </main>
   );
 }
