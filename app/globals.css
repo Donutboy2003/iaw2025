@@ -2,10 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,6 +19,7 @@
 }
 
 body {
+  font-family: 'Poppins', sans-serif;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -26,14 +29,16 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-/* Glow effect for the main heading */
-.glow-text {
-  text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700, 0 0 15px #ffd700;
-  color: white; /* Golden text color */
+h1, h2, h3, h4, h5, h6, strong {
+  font-family: 'Baskervville', serif;
+  color: #bbae72;
+  text-shadow: 0 0 8px #bbae72;
 }
 
-/* Subtle glow effect for the subheading */
-.glow-text-small {
-  text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700;
-  color: #ffd900bb; /* Golden text color */
+.glow-text {
+  color: #bbae72;
+  text-shadow:
+    0 0 10px #bbae72,
+    0 0 20px #bbae72,
+    0 0 30px #bbae72;
 }
