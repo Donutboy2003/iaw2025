@@ -8,13 +8,20 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      fontFamily: {
+        baskervville: ['Baskervville', 'serif'],
+        poppins: ['Poppins', 'sans-serif'],
       },
+      colors: {
+        gold: '#bbae72',
+      },
+      boxShadow: {
+        neomorphic: '8px 8px 16px #0c0c0c, -8px -8px 16px #282828',
+        neomorphicInset: 'inset 3px 3px 6px rgba(0,0,0,0.4), inset -3px -3px 6px rgba(255,255,255,0.1)',
+      }
     },
   },
   plugins: [],
 }
+
 export default config
