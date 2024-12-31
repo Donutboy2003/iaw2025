@@ -77,7 +77,7 @@ const TabCard: React.FC<TabCardProps> = ({ events }) => {
         <div className="space-y-4">
           <h2 className="text-2xl font-baskervville glow-text">Learn About Islam</h2>
           <p className="font-poppins">
-            Islam is one of the world's major religions ....
+            Islam is ....
           </p>
         </div>
       ),
