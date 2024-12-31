@@ -25,3 +25,15 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+/* Glow effect for the main heading */
+.glow-text {
+  text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700, 0 0 15px #ffd700;
+  color: white; /* Golden text color */
+}
+
+/* Subtle glow effect for the subheading */
+.glow-text-small {
+  text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700;
+  color: #ffd900bb; /* Golden text color */
+}
