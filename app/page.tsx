@@ -108,21 +108,24 @@ const events: Event[] = [
   },
 ];
 
-
 export default function Home() {
   const [nextEvent, setNextEvent] = useState<Event | null>(null);
   const [timeRemaining, setTimeRemaining] = useState<string>("");
 
-  // Find the next upcoming event
+  // State for showing/hiding the "Back to Top" button
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
   useEffect(() => {
+   
     const now = new Date();
     const upcomingEvent = events.find(
       (event) => new Date(`${event.date}T${event.startTime}`) > now
     );
     setNextEvent(upcomingEvent || null);
 
+    let interval: NodeJS.Timeout | null = null;
     if (upcomingEvent) {
-      const interval = setInterval(() => {
+      interval = setInterval(() => {
         const eventTime = new Date(`${upcomingEvent.date}T${upcomingEvent.startTime}`);
         const diff = eventTime.getTime() - new Date().getTime();
 
@@ -135,10 +138,29 @@ export default function Home() {
           setTimeRemaining("Event is starting now!");
         }
       }, 1000);
-
-      return () => clearInterval(interval);
     }
+
+    // Show/hide "Back to Top" button on scroll
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      // Cleanup
+      if (interval) clearInterval(interval);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
+  // Scroll to top
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <main className="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden">
@@ -163,59 +185,94 @@ export default function Home() {
 
       {/* Next Event / Countdown */}
       <section className="relative z-10 flex flex-col items-center text-center px-4 py-8 text-white space-y-4 sm:space-y-6">
-  {nextEvent ? (
-    <div className="w-full max-w-lg bg-black bg-opacity-70 rounded-lg shadow-md p-6 transition">
-      <h3 className="text-xl sm:text-2xl font-baskervville mb-2">
-        Next Event In:{" "}
-        <span className="text-gold">{timeRemaining}</span>
-      </h3>
-      <h2 className="text-lg sm:text-xl font-baskervville mb-3 text-gold">
-        {nextEvent.name}
-      </h2>
-      <div className="space-y-1 mb-4 text-sm sm:text-base text-white">
-        <p>Date: {nextEvent.date}</p>
-        <p>Start Time: {nextEvent.startTime}</p>
-        <p>End Time: {nextEvent.endTime}</p>
-        <p>Location: {nextEvent.location}</p>
-      </div>
-      {[1, 3, 4, 5, 6, 7, 8, 9, 10].includes(nextEvent.id) ? (
-        <button
-          className="inline-block px-5 py-2 bg-gray-500 text-gray-300 rounded-md font-medium cursor-not-allowed focus:outline-none"
-          disabled
-        >
-          RSVP Disabled
-        </button>
-      ) : (
-        <a
-          href={nextEvent.rsvpLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block px-5 py-2 bg-gold text-black rounded-md font-medium hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-        >
-          RSVP
-        </a>
-      )}
-    </div>
-  ) : (
-    <div className="w-full max-w-lg bg-black bg-opacity-70 rounded-lg shadow-md p-6">
-      <h3 className="text-xl sm:text-2xl font-baskervville mb-2">
-        No upcoming events
-      </h3>
-      <p className="text-sm sm:text-base text-gray-300">
-        Stay tuned for updates or check out our full itinerary below!
-      </p>
-    </div>
-  )}
-</section>
-
+        {nextEvent ? (
+          <div className="w-full max-w-lg bg-black bg-opacity-70 rounded-lg shadow-md p-6 transition">
+            <h3 className="text-xl sm:text-2xl font-baskervville mb-2">
+              Next Event In:{" "}
+              <span className="text-gold">{timeRemaining}</span>
+            </h3>
+            <h2 className="text-lg sm:text-xl font-baskervville mb-3 text-gold">
+              {nextEvent.name}
+            </h2>
+            <div className="space-y-1 mb-4 text-sm sm:text-base text-white">
+              <p>Date: {nextEvent.date}</p>
+              <p>Start Time: {nextEvent.startTime}</p>
+              <p>End Time: {nextEvent.endTime}</p>
+              <p>Location: {nextEvent.location}</p>
+            </div>
+            {[1, 3, 4, 5, 6, 7, 8, 9, 10].includes(nextEvent.id) ? (
+              <button
+                className="inline-block px-5 py-2 bg-gray-500 text-gray-300 rounded-md font-medium cursor-not-allowed focus:outline-none"
+                disabled
+              >
+                RSVP Disabled
+              </button>
+            ) : (
+              <a
+                href={nextEvent.rsvpLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-5 py-2 bg-gold text-black rounded-md font-medium hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              >
+                RSVP
+              </a>
+            )}
+          </div>
+        ) : (
+          <div className="w-full max-w-lg bg-black bg-opacity-70 rounded-lg shadow-md p-6">
+            <h3 className="text-xl sm:text-2xl font-baskervville mb-2">
+              No upcoming events
+            </h3>
+            <p className="text-sm sm:text-base text-gray-300">
+              Stay tuned for updates or check out our full itinerary below!
+            </p>
+          </div>
+        )}
+      </section>
 
       {/* TabCard / Pill Navigation & Content */}
       <section className="relative z-10 flex flex-col items-center text-center px-4 pb-16 text-white">
         <div className="w-full max-w-xl mx-auto">
-          {/* You already have a TabCard that uses pill navigation inside */}
+          
           <TabCard events={events} />
         </div>
       </section>
+
+      
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="
+            fixed 
+            bottom-6 right-6
+            w-10 h-10
+            bg-gray-800 bg-opacity-60
+            text-gold
+            rounded-full
+            flex items-center justify-center
+            hover:bg-gray-700
+            transition-opacity duration-300
+            opacity-75
+            hover:opacity-100
+            focus:outline-none focus:ring-2 focus:ring-gold
+            z-50
+            pointer-events-auto
+          "
+          aria-label="Scroll to top"
+        >
+          {/* Up Arrow Icon */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+          </svg>
+        </button>
+      )}
     </main>
   );
 }
