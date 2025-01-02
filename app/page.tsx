@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState, useEffect } from "react";
 import Particles from "./components/ui/Particles";
@@ -23,7 +23,7 @@ const events: Event[] = [
     startTime: "11:00",
     endTime: "16:00",
     location: "CAB",
-    rsvpLink: "https://forms.gle/zJzDen1UDavuArZu5",
+    rsvpLink: "https://forms.gle/exampleRSVP1",
   },
   {
     id: 2,
@@ -59,7 +59,7 @@ const events: Event[] = [
     startTime: "17:00",
     endTime: "19:00",
     location: "TBA",
-    rsvpLink: "https://forms.gle/exampleRSVP5",
+    rsvpLink: "https://forms.gle/zJzDen1UDavuArZu5",
   },
   {
     id: 6,
@@ -77,7 +77,7 @@ const events: Event[] = [
     startTime: "17:00",
     endTime: "19:00",
     location: "TBA",
-    rsvpLink: "https://forms.gle/exampleRSVP7",
+    rsvpLink: "https://forms.gle/zJzDen1UDavuArZu5",
   },
   {
     id: 8,
@@ -95,7 +95,7 @@ const events: Event[] = [
     startTime: "13:00",
     endTime: "15:00",
     location: "TBA",
-    rsvpLink: "https://forms.gle/exampleRSVP7",
+    rsvpLink: "https://forms.gle/zJzDen1UDavuArZu5",
   },
   {
     id: 10,
@@ -104,25 +104,25 @@ const events: Event[] = [
     startTime: "13:00",
     endTime: "15:00",
     location: "TBA",
-    rsvpLink: "https://forms.gle/exampleRSVP8",
+    rsvpLink: "https://forms.gle/zJzDen1UDavuArZu5",
   },
 ];
+const rsvpEnabledEventIds: number[] = [2,5,7,9,10];
 
 export default function Home() {
   const [nextEvent, setNextEvent] = useState<Event | null>(null);
   const [timeRemaining, setTimeRemaining] = useState<string>("");
-
-  // State for showing/hiding the "Back to Top" button
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
-   
+    // 1. Find the next upcoming event
     const now = new Date();
     const upcomingEvent = events.find(
       (event) => new Date(`${event.date}T${event.startTime}`) > now
     );
     setNextEvent(upcomingEvent || null);
 
+    // 2. Countdown Logic
     let interval: NodeJS.Timeout | null = null;
     if (upcomingEvent) {
       interval = setInterval(() => {
@@ -140,7 +140,7 @@ export default function Home() {
       }, 1000);
     }
 
-    // Show/hide "Back to Top" button on scroll
+    // 3. Show/hide "Back to Top" button on scroll
     const handleScroll = () => {
       if (window.scrollY > 200) {
         setShowScrollTop(true);
@@ -151,13 +151,12 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll);
 
     return () => {
-      // Cleanup
       if (interval) clearInterval(interval);
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  // Scroll to top
+  // Smooth scroll to top
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -186,10 +185,22 @@ export default function Home() {
       {/* Next Event / Countdown */}
       <section className="relative z-10 flex flex-col items-center text-center px-4 py-8 text-white space-y-4 sm:space-y-6">
         {nextEvent ? (
-          <div className="w-full max-w-lg bg-black bg-opacity-70 rounded-lg shadow-md p-6 transition">
+          <div className="relative w-full max-w-lg bg-black bg-opacity-70 rounded-lg shadow-md p-6 transition">
+            {/* Golden border with subtle heartbeat glow animation */}
+            <div
+              className="
+                absolute
+                inset-0
+                pointer-events-none
+                rounded-lg
+                border-2 border-gold
+                z-10
+                animate-borderHeartbeat
+              "
+            />
+
             <h3 className="text-xl sm:text-2xl font-baskervville mb-2">
-              Next Event In:{" "}
-              <span className="text-gold">{timeRemaining}</span>
+              Next Event In: <span className="text-gold">{timeRemaining}</span>
             </h3>
             <h2 className="text-lg sm:text-xl font-baskervville mb-3 text-gold">
               {nextEvent.name}
@@ -200,19 +211,25 @@ export default function Home() {
               <p>End Time: {nextEvent.endTime}</p>
               <p>Location: {nextEvent.location}</p>
             </div>
-            {[1, 3, 4, 5, 6, 7, 8, 9, 10].includes(nextEvent.id) ? (
-              <button
-                className="inline-block px-5 py-2 bg-gray-500 text-gray-300 rounded-md font-medium cursor-not-allowed focus:outline-none"
-                disabled
-              >
-                RSVP Disabled
-              </button>
-            ) : (
+
+            {/* RSVP Button if nextEvent.id is in rsvpEnabledEventIds */}
+            {rsvpEnabledEventIds.includes(nextEvent.id) && (
               <a
                 href={nextEvent.rsvpLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block px-5 py-2 bg-gold text-black rounded-md font-medium hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                className="
+                  inline-block 
+                  px-5 py-2 
+                  bg-gold 
+                  text-black 
+                  rounded-md 
+                  font-medium 
+                  hover:bg-yellow-600 
+                  focus:outline-none 
+                  focus:ring-2 
+                  focus:ring-yellow-400
+                "
               >
                 RSVP
               </a>
@@ -233,28 +250,35 @@ export default function Home() {
       {/* TabCard / Pill Navigation & Content */}
       <section className="relative z-10 flex flex-col items-center text-center px-4 pb-16 text-white">
         <div className="w-full max-w-xl mx-auto">
-          
-          <TabCard events={events} />
+          <TabCard events={events} rsvpEnabledEventIds={rsvpEnabledEventIds} />
         </div>
       </section>
 
-      
+      {/* "Back to Top" Round Button */}
       {showScrollTop && (
         <button
           onClick={scrollToTop}
           className="
             fixed 
-            bottom-6 right-6
-            w-10 h-10
-            bg-gray-800 bg-opacity-60
+            bottom-6 
+            right-6
+            w-10 
+            h-10
+            bg-gray-800 
+            bg-opacity-60
             text-gold
             rounded-full
-            flex items-center justify-center
+            flex 
+            items-center 
+            justify-center
             hover:bg-gray-700
-            transition-opacity duration-300
+            transition-opacity 
+            duration-300
             opacity-75
             hover:opacity-100
-            focus:outline-none focus:ring-2 focus:ring-gold
+            focus:outline-none 
+            focus:ring-2 
+            focus:ring-gold
             z-50
             pointer-events-auto
           "

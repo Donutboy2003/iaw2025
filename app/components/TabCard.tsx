@@ -12,8 +12,10 @@ interface Event {
   description?: string;
 }
 
+// NEW: Accept 'rsvpEnabledEventIds' as an additional prop
 interface TabCardProps {
   events: Event[];
+  rsvpEnabledEventIds: number[];
 }
 
 // Group events by date
@@ -24,34 +26,59 @@ function groupEventsByDate(events: Event[]): Record<string, Event[]> {
   }, {});
 }
 
-// A separate component for the flippable event card
-const EventFlipCard: React.FC<{ event: Event }> = ({ event }) => {
+// EventFlipCard that checks the 'rsvpEnabledEventIds' prop
+const EventFlipCard: React.FC<{ event: Event; rsvpEnabledEventIds: number[] }> = ({
+  event,
+  rsvpEnabledEventIds,
+}) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   return (
     <div
       className="
-        relative w-full h-64
-        overflow-hidden
-        perspective-1000
-        bg-gray-800 bg-opacity-30
-        text-white
-        rounded-md
+        relative 
+        w-full 
+        h-64 
+        overflow-hidden 
+        perspective-1000 
+        bg-gray-800 bg-opacity-30 
+        text-white 
+        rounded-md 
         mb-4
       "
     >
+      {/* Golden Strip on the Left with glow */}
       <div
-        className={`preserve-3d absolute inset-0 transition-transform duration-500 ${
-          isFlipped ? "rotate-y-180" : ""
-        }`}
+        className="
+          absolute 
+          left-0 
+          top-0 
+          w-1 
+          h-full 
+          bg-gold 
+          rounded-l-md
+          shadow-[0_0_10px_rgba(255,215,0,0.6)]
+          pointer-events-none
+          z-10
+        "
+      />
+
+      <div
+        className={`
+          preserve-3d 
+          absolute 
+          inset-0 
+          transition-transform 
+          duration-500 
+          ${isFlipped ? "rotate-y-180" : ""}
+        `}
       >
         {/* Front Side */}
         <div className="absolute inset-0 backface-hidden bg-gray-900 bg-opacity-80 rounded-md p-4 flex flex-col justify-between">
           <div>
-            <h4 className="text-lg font-semibold text-gold mb-1">
-              {event.name}
-            </h4>
-            <p className="text-sm text-gray-300 mb-2">
+            <h4 className="text-lg font-semibold text-gold mb-1">{event.name}</h4>
+            
+            <p className="text-base sm:text-lg text-gray-300 mb-2">
               {event.startTime} - {event.endTime} | {event.location}
             </p>
           </div>
@@ -63,25 +90,16 @@ const EventFlipCard: React.FC<{ event: Event }> = ({ event }) => {
                 bg-gray-700 text-white
                 rounded
                 hover:bg-gray-600
-                focus:outline-none focus:ring-1 focus:ring-gold
+                focus:outline-none 
+                focus:ring-1 
+                focus:ring-gold
               "
             >
               Learn More
             </button>
-            {[1, 3, 4, 5, 6, 7, 8, 9, 10].includes(event.id) ? (
-              <button
-                className="
-                  px-3 py-1 text-xs sm:text-sm
-                  bg-gray-500 text-gray-300 
-                  rounded
-                  cursor-not-allowed
-                  focus:outline-none
-                "
-                disabled
-              >
-                RSVP Disabled
-              </button>
-            ) : (
+
+            {/* If this event's ID is in rsvpEnabledEventIds, show the RSVP button */}
+            {rsvpEnabledEventIds.includes(event.id) && (
               <a
                 href={event.rsvpLink}
                 target="_blank"
@@ -91,7 +109,9 @@ const EventFlipCard: React.FC<{ event: Event }> = ({ event }) => {
                   bg-gold text-black 
                   rounded
                   hover:bg-yellow-500
-                  focus:outline-none focus:ring-1 focus:ring-gold
+                  focus:outline-none 
+                  focus:ring-1 
+                  focus:ring-gold
                 "
               >
                 RSVP
@@ -101,7 +121,20 @@ const EventFlipCard: React.FC<{ event: Event }> = ({ event }) => {
         </div>
 
         {/* Back Side */}
-        <div className="absolute inset-0 backface-hidden bg-gray-900 bg-opacity-90 rounded-md p-4 rotate-y-180 flex flex-col justify-between">
+        <div
+          className="
+            absolute 
+            inset-0 
+            backface-hidden
+            bg-gray-900 
+            bg-opacity-90
+            rounded-md 
+            p-4
+            rotate-y-180
+            flex flex-col 
+            justify-between
+          "
+        >
           <div>
             <h4 className="text-lg font-semibold text-gold mb-2">
               About this event
@@ -114,11 +147,18 @@ const EventFlipCard: React.FC<{ event: Event }> = ({ event }) => {
             <button
               onClick={() => setIsFlipped(false)}
               className="
-                mt-2 px-3 py-1 text-xs sm:text-sm
-                bg-gray-700 text-white
+                mt-2 
+                px-3 
+                py-1 
+                text-xs 
+                sm:text-sm
+                bg-gray-700 
+                text-white
                 rounded
                 hover:bg-gray-600
-                focus:outline-none focus:ring-1 focus:ring-gold
+                focus:outline-none 
+                focus:ring-1 
+                focus:ring-gold
               "
             >
               Go Back
@@ -130,8 +170,7 @@ const EventFlipCard: React.FC<{ event: Event }> = ({ event }) => {
   );
 };
 
-
-const TabCard: React.FC<TabCardProps> = ({ events }) => {
+const TabCard: React.FC<TabCardProps> = ({ events, rsvpEnabledEventIds }) => {
   const groupedEvents = groupEventsByDate(events);
   const allDates = Object.keys(groupedEvents).sort();
 
@@ -146,7 +185,7 @@ const TabCard: React.FC<TabCardProps> = ({ events }) => {
     });
   };
 
-  // Sub-pill navigation for all date
+  // Sub-pill navigation for all dates
   const renderDatePills = () => (
     <div className="flex flex-wrap gap-2 mb-4 overflow-x-auto">
       {allDates.map((date) => (
@@ -154,9 +193,13 @@ const TabCard: React.FC<TabCardProps> = ({ events }) => {
           key={date}
           onClick={() => handleDateClick(date)}
           className="
-            px-3 py-1 text-sm sm:text-base
+            px-3 
+            py-1 
+            text-sm 
+            sm:text-base
             rounded-full
-            bg-gray-700 text-white
+            bg-gray-700 
+            text-white
             hover:bg-gray-600
             transition
             whitespace-nowrap
@@ -182,9 +225,13 @@ const TabCard: React.FC<TabCardProps> = ({ events }) => {
           <h3 className="text-base sm:text-lg font-semibold text-gold mb-3">
             {date}
           </h3>
-          {/* Map each event to a big flippable card */}
+          {/* Map each event to a big flippable card, passing down rsvpEnabledEventIds */}
           {groupedEvents[date].map((ev) => (
-            <EventFlipCard key={ev.id} event={ev} />
+            <EventFlipCard
+              key={ev.id}
+              event={ev}
+              rsvpEnabledEventIds={rsvpEnabledEventIds}
+            />
           ))}
         </div>
       ))}
@@ -258,7 +305,7 @@ const TabCard: React.FC<TabCardProps> = ({ events }) => {
             About Speakers
           </h2>
           <p className="font-poppins text-sm sm:text-base text-gray-300">
-            Coming soon
+            Coming soon...
           </p>
         </div>
       ),
