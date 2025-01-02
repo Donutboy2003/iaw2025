@@ -68,7 +68,7 @@ const EventFlipCard: React.FC<{ event: Event }> = ({ event }) => {
             >
               Learn More
             </button>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].includes(event.id) ? (
+            {[1, 3, 4, 5, 6, 7, 8, 9, 10].includes(event.id) ? (
               <button
                 className="
                   px-3 py-1 text-xs sm:text-sm
