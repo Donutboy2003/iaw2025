@@ -23,7 +23,7 @@ const events: Event[] = [
     startTime: "11:00",
     endTime: "16:00",
     location: "CAB",
-    rsvpLink: "https://forms.gle/exampleRSVP1",
+    rsvpLink: "https://forms.gle/zJzDen1UDavuArZu5",
   },
   {
     id: 2,
@@ -178,7 +178,7 @@ export default function Home() {
         <p>End Time: {nextEvent.endTime}</p>
         <p>Location: {nextEvent.location}</p>
       </div>
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].includes(nextEvent.id) ? (
+      {[2, 3, 4, 5, 6, 7, 8, 9, 10].includes(nextEvent.id) ? (
         <button
           className="inline-block px-5 py-2 bg-gray-500 text-gray-300 rounded-md font-medium cursor-not-allowed focus:outline-none"
           disabled
