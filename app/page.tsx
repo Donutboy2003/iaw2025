@@ -144,7 +144,7 @@ export default function Home() {
     <main className="relative min-h-screen bg-gradient-to-br from-black via-gray-900 to-black overflow-hidden">
       {/* Particles Background */}
       <Particles
-        className="absolute inset-0 z-0"
+        className="fixed inset-0 z-0 pointer-events-none"
         quantity={200}
         color="#FFD700"
         size={0.4}
