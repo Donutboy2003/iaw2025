@@ -86,7 +86,7 @@ const events: Event[] = [
     startTime: "17:00",
     endTime: "20:00",
     location: "TBA",
-    rsvpLink: "https://forms.gle/exampleRSVP8",
+    rsvpLink: "https://buytickets.at/msauofa/1521527",
   },
   {
     id: 9,
@@ -107,7 +107,7 @@ const events: Event[] = [
     rsvpLink: "https://forms.gle/zJzDen1UDavuArZu5",
   },
 ];
-const rsvpEnabledEventIds: number[] = [2,5,7,9,10];
+const rsvpEnabledEventIds: number[] = [2,5,7,8,9,10];
 
 export default function Home() {
   const [nextEvent, setNextEvent] = useState<Event | null>(null);
@@ -249,6 +249,31 @@ export default function Home() {
 
       {/* TabCard / Pill Navigation & Content */}
       <section className="relative z-10 flex flex-col items-center text-center px-4 pb-16 text-white">
+        <div className="w-full max-w-xl mx-auto mb-6">
+          <a
+            href="https://forms.gle/zJzDen1UDavuArZu5"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+              inline-block 
+              px-6 
+              py-2 
+              bg-gold 
+              text-black 
+              rounded-md 
+              font-medium 
+              hover:bg-yellow-600 
+              focus:outline-none 
+              focus:ring-2 
+              focus:ring-yellow-400
+              transition
+              shadow-md
+            "
+          >
+            RSVP
+          </a>
+        </div>
+        
         <div className="w-full max-w-xl mx-auto">
           <TabCard events={events} rsvpEnabledEventIds={rsvpEnabledEventIds} />
         </div>
