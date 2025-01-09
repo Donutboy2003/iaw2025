@@ -31,7 +31,7 @@ const events: Event[] = [
     date: "2025-01-13",
     startTime: "17:00",
     endTime: "19:00",
-    location: "TBA",
+    location: "ECHA L1-190",
     rsvpLink: "https://forms.gle/zJzDen1UDavuArZu5",
   },
   {
@@ -49,7 +49,7 @@ const events: Event[] = [
     date: "2025-01-15",
     startTime: "11:00",
     endTime: "16:00",
-    location: "SUB",
+    location: "TBA",
     rsvpLink: "https://forms.gle/exampleRSVP4",
   },
   {
@@ -58,7 +58,7 @@ const events: Event[] = [
     date: "2025-01-15",
     startTime: "17:00",
     endTime: "19:00",
-    location: "TBA",
+    location: "ECHA L1-190",
     rsvpLink: "https://forms.gle/zJzDen1UDavuArZu5",
   },
   {
@@ -76,7 +76,7 @@ const events: Event[] = [
     date: "2025-01-16",
     startTime: "17:00",
     endTime: "19:00",
-    location: "TBA",
+    location: "ECHA L1-490",
     rsvpLink: "https://forms.gle/zJzDen1UDavuArZu5",
   },
   {
@@ -85,7 +85,7 @@ const events: Event[] = [
     date: "2025-01-17",
     startTime: "17:00",
     endTime: "20:00",
-    location: "TBA",
+    location: "Telus Atrium",
     rsvpLink: "https://buytickets.at/msauofa/1521527",
   },
   {
@@ -94,7 +94,7 @@ const events: Event[] = [
     date: "2025-01-18",
     startTime: "13:00",
     endTime: "15:00",
-    location: "TBA",
+    location: "ECHA 2-430",
     rsvpLink: "https://forms.gle/zJzDen1UDavuArZu5",
   },
   {
