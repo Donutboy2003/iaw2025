@@ -67,7 +67,7 @@ const events: Event[] = [
     date: "Jan 16 (Thu)",
     startTime: "11:00am",
     endTime: "4:00pm",
-    location: "CAB",
+    location: "CAB Main Floor",
     rsvpLink: "https://forms.gle/exampleRSVP6",
   },
   {
@@ -103,7 +103,7 @@ const events: Event[] = [
     date: "Jan 18 (Sat)",
     startTime: "1:00pm",
     endTime: "3:00pm",
-    location: "TBA",
+    location: "Sub Orion Room",
     rsvpLink: "https://forms.gle/zJzDen1UDavuArZu5",
   },
 ];
