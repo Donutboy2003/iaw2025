@@ -38,7 +38,7 @@ const EventFlipCard: React.FC<{ event: Event; rsvpEnabledEventIds: number[] }> =
       className="
         relative 
         w-full 
-        h-64 
+        h-32 
         overflow-hidden 
         perspective-1000 
         bg-gray-800 bg-opacity-30 
@@ -82,8 +82,8 @@ const EventFlipCard: React.FC<{ event: Event; rsvpEnabledEventIds: number[] }> =
               {event.startTime} - {event.endTime} | {event.location}
             </p>
           </div>
-          <div className="mt-2 flex justify-between items-center">
-            <button
+          <div className="mt-2 items-center">
+            {/* <button
               onClick={() => setIsFlipped(true)}
               className="
                 px-3 py-1 text-xs sm:text-sm
@@ -96,7 +96,7 @@ const EventFlipCard: React.FC<{ event: Event; rsvpEnabledEventIds: number[] }> =
               "
             >
               Learn More
-            </button>
+            </button> */}
 
             {/* If this event's ID is in rsvpEnabledEventIds, show the RSVP button */}
             {rsvpEnabledEventIds.includes(event.id) && (

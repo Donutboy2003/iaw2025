@@ -19,105 +19,140 @@ const events: Event[] = [
   {
     id: 1,
     name: "Daw'ah Table & Free Waffles",
-    date: "2025-01-13",
-    startTime: "11:00",
-    endTime: "16:00",
-    location: "CAB",
+    date: "Jan 13 (Mon)",
+    startTime: "11:00am",
+    endTime: "4:00pm",
+    location: "CAB Main Floor",
     rsvpLink: "https://forms.gle/exampleRSVP1",
   },
   {
     id: 2,
     name: "Lecture by Navaid Aziz",
-    date: "2025-01-13",
-    startTime: "17:00",
-    endTime: "19:00",
+    date: "Jan 13 (Mon)",
+    startTime: "5:00pm",
+    endTime: "7:00pm",
     location: "ECHA L1-190",
     rsvpLink: "https://forms.gle/zJzDen1UDavuArZu5",
   },
   {
     id: 3,
     name: "Daw'ah Table & Hijab Booth",
-    date: "2025-01-14",
-    startTime: "11:00",
-    endTime: "16:00",
-    location: "CAB",
+    date: "Jan 14 (Tue)",
+    startTime: "11:00am",
+    endTime: "4:00pm",
+    location: "CAB Main Floor",
     rsvpLink: "https://forms.gle/exampleRSVP3",
   },
   {
     id: 4,
     name: "Daw'ah Table & Virtual Reality",
-    date: "2025-01-15",
-    startTime: "11:00",
-    endTime: "16:00",
-    location: "TBA",
+    date: "Jan 15 (Wed)",
+    startTime: "11:00am",
+    endTime: "4:00pm",
+    location: "Outside HUB 172",
     rsvpLink: "https://forms.gle/exampleRSVP4",
   },
   {
     id: 5,
     name: "Lecture by Tim Humble",
-    date: "2025-01-15",
-    startTime: "17:00",
-    endTime: "19:00",
+    date: "Jan 15 (Wed)",
+    startTime: "5:00pm",
+    endTime: "7:00pm",
     location: "ECHA L1-190",
     rsvpLink: "https://forms.gle/zJzDen1UDavuArZu5",
   },
   {
     id: 6,
     name: "Daw'ah Table & Hijab Booth",
-    date: "2025-01-16",
-    startTime: "11:00",
-    endTime: "16:00",
-    location: "CAB",
+    date: "Jan 16 (Thu)",
+    startTime: "11:00am",
+    endTime: "4:00pm",
+    location: "CAB Main Floor",
     rsvpLink: "https://forms.gle/exampleRSVP6",
   },
   {
     id: 7,
     name: "Lecture by Way of Life SQ",
-    date: "2025-01-16",
-    startTime: "17:00",
-    endTime: "19:00",
+    date: "Jan 16 (Thu)",
+    startTime: "5:00pm",
+    endTime: "7:00pm",
     location: "ECHA L1-490",
     rsvpLink: "https://forms.gle/zJzDen1UDavuArZu5",
   },
   {
     id: 8,
     name: "IAW Dinner with special guest Way of Life SQ",
-    date: "2025-01-17",
-    startTime: "17:00",
-    endTime: "20:00",
+    date: "Jan 17 (Fri)",
+    startTime: "5:00pm",
+    endTime: "8:00pm",
     location: "Telus Atrium",
     rsvpLink: "https://buytickets.at/msauofa/1521527",
   },
   {
     id: 9,
     name: "Brothers session with Way of Life SQ",
-    date: "2025-01-18",
-    startTime: "13:00",
-    endTime: "15:00",
+    date: "Jan 18 (Sat)",
+    startTime: "1:00pm",
+    endTime: "3:00pm",
     location: "ECHA 2-430",
     rsvpLink: "https://forms.gle/zJzDen1UDavuArZu5",
   },
   {
     id: 10,
     name: "Sisters' Table of Barakah Halaqa",
-    date: "2025-01-18",
-    startTime: "13:00",
-    endTime: "15:00",
-    location: "TBA",
+    date: "Jan 18 (Sat)",
+    startTime: "1:00pm",
+    endTime: "3:00pm",
+    location: "Sub Orion Room",
     rsvpLink: "https://forms.gle/zJzDen1UDavuArZu5",
   },
 ];
 const rsvpEnabledEventIds: number[] = [2,5,7,8,9,10];
 
+// Returns the month number (01-12) from the month name
+function monthToNum(month: string) {
+  const monthNum = new Date(Date.parse(month + " 1, 2025")).getMonth() + 1
+  if (monthNum < 10) {
+    return '0' + monthNum;
+  }
+}
+
+// Format date string to YYYY-MM-DD
+function formatDate(date: string) {
+  const [month, day] = date.split(" ", 2);
+  return '2025-' + monthToNum(month) + '-' + day;
+}
+
+// Format time from 12-hour am/pm to 24-hour format
+function formatTime(time: string) {
+  const [hour, minute] = time.trim().substring(0, time.length - 2).split(":", 2);
+  const isPM = time.includes("pm");
+  return (isPM ? parseInt(hour) + 12 : hour) + ":" + minute;
+}
+  
+function formatEvents(events: Event[]) {
+  return events.map(event => ({
+    ...event,
+    date: formatDate(event.date),
+    startTime: formatTime(event.startTime),
+    endTime: formatTime(event.endTime),
+  }));
+}
+
 export default function Home() {
   const [nextEvent, setNextEvent] = useState<Event | null>(null);
   const [timeRemaining, setTimeRemaining] = useState<string>("");
   const [showScrollTop, setShowScrollTop] = useState(false);
+  
 
   useEffect(() => {
     // 1. Find the next upcoming event
     const now = new Date();
-    const upcomingEvent = events.find(
+    console.log(events);
+    const formatedEvents = formatEvents(events);
+    console.log(formatedEvents);
+    
+    const upcomingEvent = formatedEvents.find(
       (event) => new Date(`${event.date}T${event.startTime}`) > now
     );
     setNextEvent(upcomingEvent || null);
