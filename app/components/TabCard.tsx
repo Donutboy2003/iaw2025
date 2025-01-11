@@ -38,7 +38,7 @@ const EventFlipCard: React.FC<{ event: Event; rsvpEnabledEventIds: number[] }> =
       className="
         relative 
         w-full 
-        h-32 
+        h-48
         overflow-hidden 
         perspective-1000 
         bg-gray-800 bg-opacity-30 
