@@ -307,7 +307,7 @@ const TabCard: React.FC<TabCardProps> = ({ events, rsvpEnabledEventIds }) => {
           <br />
           <br />
           Visit <a href="https://masjidquba.ca/about-islam/" className="text-blue-500 underline">Masjid Quba&apos;s website</a> for an in-depth dive in several core aspects of Islam, and use the 
-          <a href="msauofa.ca/dawah" className="text-blue-500 underline"> Dawah Contact Form</a> to contact the MSA with your questions about Islam.
+          <a href="https://msauofa.ca/dawah" className="text-blue-500 underline"> Dawah Contact Form</a> to contact the MSA with your questions about Islam.
         </p>
 
         </div>
