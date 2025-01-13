@@ -326,7 +326,7 @@ const TabCard: React.FC<TabCardProps> = ({ events, rsvpEnabledEventIds }) => {
           <br /><br />
           <b>Way of Life SQ:</b> Way of Life SQ is a teacher and Pakistani-American citizen who spreads the message of Islam through social media.
           <br /><br />
-          <b>Navaid Aziz:</b> Navaid Aziz is a Canadian Muslim public figure with a diverse academic and social background. He was raised in Montreal, Quebec where he completed a diplome d’etudes collegiales in Social Sciences from Champlain College. He then proceeded to the Islamic University of Madinah, where he completed an Associate’s Degree in the Arabic Language and a Bachelors in Islamic Law in 2008. In 2019 Navaid attained a certificate in Public Relations and Communications Management from Mount Royal University.
+          <b>Navaid Aziz:</b> Navaid Aziz is a Canadian Muslim public figure with a diverse academic and social background. He was raised in Montreal, Quebec where he completed a diplome d&apos;etudes collegiales in Social Sciences from Champlain College. He then proceeded to the Islamic University of Madinah, where he completed an Associate’s Degree in the Arabic Language and a Bachelors in Islamic Law in 2008. In 2019 Navaid attained a certificate in Public Relations and Communications Management from Mount Royal University.
 
 
           </p>
