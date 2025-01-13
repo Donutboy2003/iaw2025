@@ -322,7 +322,13 @@ const TabCard: React.FC<TabCardProps> = ({ events, rsvpEnabledEventIds }) => {
             About Speakers
           </h2>
           <p className="font-poppins text-sm sm:text-base text-gray-300">
-            Coming soon...
+          <b>Muhammad Tim Humble:</b> Muhammad Tim Humble became Muslim at the age of 14. He was accepted to study at the Islamic University of Madeenah in 2004, and graduated from the Faculty of Hadeeth and Islamic Studies in 2011. He has been involved in teaching and da&apos;wah work for several years, and currently resides in Newcastle-upon-Tyne.
+          <br /><br />
+          <b>Way of Life SQ:</b> Way of Life SQ is a teacher and Pakistani-American citizen who spreads the message of Islam through social media.
+          <br /><br />
+          <b>Navaid Aziz:</b> Navaid Aziz is a Canadian Muslim public figure with a diverse academic and social background. He was raised in Montreal, Quebec where he completed a diplome d’etudes collegiales in Social Sciences from Champlain College. He then proceeded to the Islamic University of Madinah, where he completed an Associate’s Degree in the Arabic Language and a Bachelors in Islamic Law in 2008. In 2019 Navaid attained a certificate in Public Relations and Communications Management from Mount Royal University.
+
+
           </p>
         </div>
       ),
