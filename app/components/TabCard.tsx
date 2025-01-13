@@ -291,8 +291,25 @@ const TabCard: React.FC<TabCardProps> = ({ events, rsvpEnabledEventIds }) => {
             Learn About Islam
           </h2>
           <p className="font-poppins text-sm sm:text-base text-gray-300">
-            Coming soon...
-          </p>
+          Islam is a complete and practical way of life, which literally means 'Submission' to One True God, known as Allah in Arabic. He is the Creator and Sustainer of the universe with no partners or equals. Islam is not a new religion, but the final message in a long line of prophets sent by God, (including Adam, Noah, Abraham, Moses, Jesus and finally Muhammad), preaching monotheism and righteousness.
+          <br />
+          <br />
+          Islam is built upon 6 articles that govern one's internal faith (belief in Allah, His angels, His messengers, the Day of Judgement, and divine decree), as well as 5 pillars of external worship (Testimony of Faith, Daily Prayers, Paying Alms-tax, Fasting Ramadan, and Pilgrimage to Mecca).
+          <br />
+          <br />
+          This is the essence of Islam. When practiced, Islam fulfils the spiritual, physical, psychological, and social needs of all people.
+          <br />
+          <br />
+          <q>
+            "Whoever does righteousness, male or female, and is a believer - We will surely cause him to live a good life, and We will surely give them their rewards according to the best of what they used to do" - Quran 16:97
+          </q> 
+
+          <br />
+          <br />
+          Visit <a href="https://masjidquba.ca/about-islam/" className="text-blue-500 underline">Masjid Quba's website</a> for an in-depth dive in several core aspects of Islam, and use the 
+          <a href="msauofa.ca/dawah" className="text-blue-500 underline"> Dawah Contact Form</a> to contact the MSA with your questions about Islam.
+        </p>
+
         </div>
       ),
     },
