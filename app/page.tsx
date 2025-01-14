@@ -273,6 +273,33 @@ export default function Home() {
             RSVP
           </a>
         </div>
+
+        <div className="w-full max-w-xl mx-auto mb-6">
+          <a
+            href="https://buytickets.at/msauofa/1521527"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+              inline-block 
+              px-6 
+              py-2 
+              bg-gold 
+              text-black 
+              rounded-md 
+              font-medium 
+              hover:bg-yellow-600 
+              focus:outline-none 
+              focus:ring-2 
+              focus:ring-yellow-400
+              transition
+              shadow-md
+            "
+          >
+            IAW Dinner Ticket
+          </a>
+        </div>
+
+        
         
         <div className="w-full max-w-xl mx-auto">
           <TabCard events={events} rsvpEnabledEventIds={rsvpEnabledEventIds} />
