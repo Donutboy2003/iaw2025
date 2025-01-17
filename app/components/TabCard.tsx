@@ -337,15 +337,22 @@ const TabCard: React.FC<TabCardProps> = ({ events, rsvpEnabledEventIds }) => {
       id: "sponsors",
       label: "Sponsors",
       content: (
-        <div className="space-y-3">
+        <div className="space-y-6">
           <h2 className="text-lg sm:text-xl font-baskervville text-gold">
             Sponsors
           </h2>
+          {/* Image for Sponsors */}
+          <div className="flex justify-center">
+            <img
+              src="/caliph_digital.jpg" // Replace with your image path or URL
+              alt="Sponsors Logo"
+              className="w-full max-w-sm object-contain rounded-md shadow-md"
+            />
+          
+          </div>
+          {/* Text Below the Image */}
           <p className="font-poppins text-sm sm:text-base text-gray-300">
-            Coming soon...
-          </p>
-          <p className="font-poppins text-sm sm:text-base text-gray-300">
-            Please email us at msa@ualberta.ca if you&apos;d like to sponsor IAW 2025
+            Please email us at <a href="mailto:msa@ualberta.ca" className="text-blue-500 underline">msa@ualberta.ca</a> if you&apos;d like to sponsor IAW 2025.
           </p>
         </div>
       ),
